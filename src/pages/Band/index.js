@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 const Band = () => {
   const { bandId } = useParams();
 
-  return <div>Band details Page for id {bandId}</div>;
+  return <>Band details Page for id {bandId}</>;
 };
 
 export default Band;
