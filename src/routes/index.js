@@ -3,13 +3,13 @@ import { Switch, Route } from 'react-router-dom';
 import Bands from '../pages/Bands';
 import Band from '../pages/Band';
 
-export default function index() {
+export default function Routes() {
   return (
-    <div>
+    <>
       <Switch>
         <Route exact path="/" component={Bands} />
-        <Route path="/bands/:id" component={Band} />
+        <Route path="/bands/:bandId" component={Band} />
       </Switch>
-    </div>
+    </>
   );
 }

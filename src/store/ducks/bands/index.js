@@ -4,8 +4,9 @@ import axios from 'axios';
 /**
  * ACTION TYPES
  */
-const SET_PROPERTY = 'bands/SET_PROPERTY';
-const SET_DEFAULT = 'bands/SET_DEFAULT';
+export const SET_PROPERTY = 'bands/SET_PROPERTY';
+export const SET_DEFAULT = 'bands/SET_DEFAULT';
+export const FETCH_BANDS = 'bands/FETCH_BANDS';
 
 /**
  * DEFAULT STATE
@@ -38,7 +39,7 @@ export const setDefaultState = () => dispatch =>
 export const fetchProperty = (property, data) => dispatch =>
   dispatch({ type: SET_PROPERTY, property, data });
 
-export const fetchList = () => dispatch => {
+export const fetchBands = () => dispatch => {
   const url = `${process.env.REACT_APP_API_URL}/bands`;
 
   axios.get(url).then(response => {
