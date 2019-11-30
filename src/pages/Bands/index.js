@@ -1,10 +1,17 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { fetchBands, filterBy, fetchOrderBy } from '../../store/ducks/bands';
+import {
+  fetchBands,
+  filterBy,
+  fetchOrderBy,
+  fetchAlbums,
+} from '../../store/ducks/bands';
 import Header from './components/Header';
 import List from './components/List';
 import OrderBy from './components/OrderBy';
+
+import { Wrap } from './styles';
 
 const Bands = () => {
   const state = useSelector(state => state.bands.toJS());
@@ -13,6 +20,7 @@ const Bands = () => {
 
   useEffect(() => {
     dispatch(() => fetchBands(dispatch));
+    dispatch(() => fetchAlbums(dispatch));
   }, []);
 
   const fetchQuey = ({ target: { value } }) => {
@@ -24,12 +32,12 @@ const Bands = () => {
   };
 
   return (
-    <>
+    <Wrap>
       {error}
       <Header query={query} onChange={fetchQuey} />
       <OrderBy onClick={orderBy} />
       <List list={filtered} />
-    </>
+    </Wrap>
   );
 };
 

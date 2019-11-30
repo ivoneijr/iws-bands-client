@@ -4,8 +4,7 @@ import axios from 'axios';
 /**
  * ACTION TYPES
  */
-export const SET_PROPERTY = 'bands/SET_PROPERTY';
-export const FETCH_BANDS = 'bands/FETCH_BANDS';
+const SET_PROPERTY = 'SET_PROPERTY';
 
 /**
  * DEFAULT STATE
@@ -15,6 +14,7 @@ const DEFAULT_STATE = fromJS({
   query: '',
   list: [],
   filtered: [],
+  albums: [],
   asc: true,
 });
 
@@ -45,6 +45,17 @@ export const fetchBands = async dispatch => {
 
     dispatch({ type: SET_PROPERTY, property: 'list', data });
     dispatch({ type: SET_PROPERTY, property: 'filtered', data });
+  } catch ({ message: data }) {
+    dispatch({ type: SET_PROPERTY, property: 'error', data });
+  }
+};
+
+export const fetchAlbums = async dispatch => {
+  try {
+    const url = `${process.env.REACT_APP_API_URL}/albums`;
+    const { data } = await axios.get(url);
+
+    dispatch({ type: SET_PROPERTY, property: 'albums', data });
   } catch ({ message: data }) {
     dispatch({ type: SET_PROPERTY, property: 'error', data });
   }
