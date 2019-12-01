@@ -9,45 +9,27 @@ import Divider from '@material-ui/core/Divider';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import CloseIcon from '@material-ui/icons/Close';
+import { ArrowBackIos } from '@material-ui/icons';
 import Slide from '@material-ui/core/Slide';
 
 const useStyles = makeStyles(theme => ({
   appBar: {
     position: 'relative',
   },
-  title: {
-    marginLeft: theme.spacing(2),
-    flex: 1,
-  },
 }));
 
 const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
+  return <Slide direction="left" ref={ref} {...props} />;
 });
 
-export default function Details() {
+export default function Details({ isOpen, toggleDetails }) {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
   return (
     <div>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        Open full-screen dialog
-      </Button>
       <Dialog
         fullScreen
-        open={open}
-        onClose={handleClose}
+        open={isOpen}
+        onClose={toggleDetails}
         TransitionComponent={Transition}
       >
         <AppBar className={classes.appBar}>
@@ -55,10 +37,10 @@ export default function Details() {
             <IconButton
               edge="start"
               color="inherit"
-              onClick={handleClose}
+              onClick={toggleDetails}
               aria-label="close"
             >
-              <CloseIcon />
+              <ArrowBackIos />
             </IconButton>
           </Toolbar>
         </AppBar>

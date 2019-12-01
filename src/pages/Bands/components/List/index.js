@@ -1,16 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-const List = ({ list }) =>
-  list && (
-    <>
-      <ul>
-        {list.map(band => (
-          <li key={band.id}>
-            <Link to={`/bands/${band.id}`}>{band.name}</Link>({band.numPlays})
-          </li>
-        ))}
-      </ul>
-    </>
-  );
+import { List as MuiList } from '@material-ui/core';
+import Item from './components/Item';
 
-export default List;
+const BandList = ({ list, onClickItem }) => (
+  <MuiList>
+    {list.map(band => (
+      <Item key={band.id} item={band} onClick={onClickItem} />
+    ))}
+  </MuiList>
+);
+
+export default BandList;

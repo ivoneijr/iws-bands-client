@@ -6,6 +6,7 @@ import {
   filterBy,
   fetchOrderBy,
   fetchAlbums,
+  fetchProperty,
 } from '../../store/ducks/bands';
 import TopNav from './components/TopNav';
 import List from './components/List';
@@ -15,28 +16,30 @@ import Details from './components/Details';
 const Bands = () => {
   const state = useSelector(state => state.bands.toJS());
   const dispatch = useDispatch();
-  const { list, query, filtered, asc, error } = state;
+  const { list, query, filtered, asc, showDetails, selectedBand } = state;
 
   useEffect(() => {
     dispatch(() => fetchBands(dispatch));
     dispatch(() => fetchAlbums(dispatch));
   }, []);
 
-  function fetchQuey({ target: { value } }) {
-    filterBy(value, list, dispatch);
-  }
+  const fetchQuey = ({ target: { value } }) => filterBy(value, list, dispatch);
 
-  function orderBy(property) {
-    fetchOrderBy(property, filtered, asc, dispatch);
-  }
+  const orderBy = property => fetchOrderBy(property, filtered, asc, dispatch);
+
+  const toggleDetails = () =>
+    fetchProperty('showDetails', !showDetails, dispatch);
 
   return (
     <>
-      {error}
-      <TopNav query={query} onChange={fetchQuey} />
+      <TopNav query={query} onChange={fetchQuey} length={filtered.length} />
       <OrderBy onClick={orderBy} length={filtered.length} />
-      <List list={filtered} />
-      <Details />
+      <List list={filtered} onClickItem={toggleDetails} />
+      <Details
+        isOpen={showDetails}
+        toggleDetails={toggleDetails}
+        selectedBand={selectedBand}
+      />
     </>
   );
 };

@@ -15,7 +15,9 @@ const DEFAULT_STATE = fromJS({
   list: [],
   filtered: [],
   albums: [],
+  selectedBand: {},
   asc: true,
+  showDetails: false,
 });
 
 /**
@@ -34,9 +36,8 @@ const reducer = (state = DEFAULT_STATE, action = {}) => {
 /**
  * THUNK ACTION CREATORS
  */
-export const fetchProperty = (property, data) => dispatch => {
+export const fetchProperty = (property, data, dispatch) =>
   dispatch({ type: SET_PROPERTY, property, data });
-};
 
 export const fetchBands = async dispatch => {
   try {
