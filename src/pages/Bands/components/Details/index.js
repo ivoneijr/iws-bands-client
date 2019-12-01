@@ -12,7 +12,7 @@ const Transition = forwardRef((props, ref) => (
 
 const Details = ({ toggleDetails }) => {
   const state = useSelector(state => state.bands.toJS());
-  const { showDetails: isOpen, selectedBand: band } = state;
+  const { showDetails: isOpen, selectedBand: band, albums } = state;
 
   return (
     <>
@@ -23,7 +23,7 @@ const Details = ({ toggleDetails }) => {
         TransitionComponent={Transition}
       >
         <Header toggleDetails={toggleDetails} />
-        <Content band={band} />
+        <Content band={band} albums={albums} />
       </Dialog>
     </>
   );
