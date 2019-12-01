@@ -7,11 +7,10 @@ import {
   fetchOrderBy,
   fetchAlbums,
 } from '../../store/ducks/bands';
-import Header from './components/Header';
+import TopNav from './components/TopNav';
 import List from './components/List';
 import OrderBy from './components/OrderBy';
-
-import { Wrap } from './styles';
+import Details from './components/Details';
 
 const Bands = () => {
   const state = useSelector(state => state.bands.toJS());
@@ -23,21 +22,22 @@ const Bands = () => {
     dispatch(() => fetchAlbums(dispatch));
   }, []);
 
-  const fetchQuey = ({ target: { value } }) => {
+  function fetchQuey({ target: { value } }) {
     filterBy(value, list, dispatch);
-  };
+  }
 
-  const orderBy = property => {
+  function orderBy(property) {
     fetchOrderBy(property, filtered, asc, dispatch);
-  };
+  }
 
   return (
-    <Wrap>
+    <>
       {error}
-      <Header query={query} onChange={fetchQuey} />
-      <OrderBy onClick={orderBy} />
+      <TopNav query={query} onChange={fetchQuey} />
+      <OrderBy onClick={orderBy} length={filtered.length} />
       <List list={filtered} />
-    </Wrap>
+      <Details />
+    </>
   );
 };
 
