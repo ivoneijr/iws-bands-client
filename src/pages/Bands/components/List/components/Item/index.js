@@ -4,11 +4,11 @@ import { ListItem, Divider } from '@material-ui/core';
 import Avatar from './Avatar';
 import Info from './Info';
 
-const Item = ({ item: { image, numPlays, name }, onClick }) => (
+const Item = ({ item, onClick }) => (
   <>
-    <ListItem onClick={onClick}>
-      <Avatar src={image} />
-      <Info plays={numPlays} name={name} />
+    <ListItem onClick={() => onClick(null, item)}>
+      <Avatar src={item.image} />
+      <Info plays={item.numPlays} name={item.name} />
     </ListItem>
     <Divider />
   </>

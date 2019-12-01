@@ -1,7 +1,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Bands from '../pages/Bands';
-import Band from '../pages/Band';
 
 const Routes = () => (
   <>

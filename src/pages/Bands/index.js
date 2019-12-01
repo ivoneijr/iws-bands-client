@@ -27,8 +27,10 @@ const Bands = () => {
 
   const orderBy = property => fetchOrderBy(property, filtered, asc, dispatch);
 
-  const toggleDetails = () =>
+  const toggleDetails = (_event, band) => {
+    fetchProperty('selectedBand', band || {}, dispatch);
     fetchProperty('showDetails', !showDetails, dispatch);
+  };
 
   return (
     <>
